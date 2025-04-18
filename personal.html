@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Markas Enterprise MKE</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f9;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #0a3362;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    header img {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+  .logo-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo-brand img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .brand-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-name {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+  }
+
+  .slogan {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #f4f404;
+    font-style: italic;
+  }
+    a {
+      cursor: url('paw-icon.svg'), pointer;
+      text-decoration: none;
+      color: #f4f404;
+    }
+
+    a:hover {
+      color: #4caf50; /* Change link color on hover */
+    }
+    nav a {
+      margin: 0 0.7rem;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    nav a:hover, nav a.active-link {
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .social-links a {
+      margin: 0 0.5rem;
+      font-size: 1.5rem;
+      color: #4caf50;
+      text-decoration: none;
+    }
+    .book, .gallery-item, form {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Create 3 equal columns */
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.gallery-item {
+  display: flex;
+  flex-direction: column; /* Stack the image and text vertically */
+  justify-content: flex-start; /* Align the content at the top */
+  align-items: center; /* Center the content horizontally */
+  height: auto; /* Allow the container to grow based on content */
+  cursor:pointer;
+  overflow: hidden; /* Hide the part of the image that overflows */
+  position: relative;
+}
+
+.gallery-item img {
+  width: 100%; /* Ensure the image covers the full width */
+  height: 200px; /* Set a fixed height for the image */
+  object-fit: contain; /* Maintain aspect ratio and fit the image */
+  object-position: top center; /* Align the image to the top-center */
+  border-radius: 8px; /* Optional: For rounded corners */
+  transition: transform 0.3s ease-in-out;/* smooth zoom effect*/
+}
+
+.gallery-item p {
+  margin-top: 1rem; /* Add spacing between image and text */
+  text-align: center; /* Center-align the paragraph */
+  color: #333; /* Optional: Custom text color */
+}
+
+
+/* When zoomed in, scale the image */
+.gallery-item.zoomed img {
+  transform: scale(2); /* Zoom in the image */
+}
+
+    .about {
+      background: #fff;
+      padding: 1rem;
+      border-left: 4px solid #4caf50;
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .about img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .about-details {
+      flex: 1;
+    }
+    .about-banner {
+  position: relative;
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.about-banner img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.profile-pic {
+  position: absolute;
+  bottom: 0px;
+  left: 10%;
+  transform: translateX(-50%);
+  border: 5px solid white;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 120px;
+  height: 120px;
+  background: white;
+}
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-details-container {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+}
+.about-details {
+  background: #fff;
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.mpesa-manual {
+  margin-top: 1rem;
+  background: #f0f7f4;
+  padding: 1rem;
+  border-radius: 6px;
+  border-left: 4px solid #4caf50;
+  box-shadow: 0 0 4px rgba(0,0,0,0.05);
+}
+
+.mpesa-manual .till-number {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #0a3362;
+  margin: 0.5rem 0;
+}
+
+
+    form input, form textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    form button {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    footer {
+      background: #2e2e2e;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.95rem;
+    }
+    footer h4 {
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    #blog {
+    background: #f9f9fb;
+    padding: 3rem 1rem;
+  }
+
+  .blog-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #blog h2 {
+    font-size: 2.5rem;
+    color: #0a3362;
+    margin-bottom: 1rem;
+  }
+
+  .intro-text {
+    color: #555;
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .blog-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .blog-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .blog-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .blog-content h3 {
+    color: #4caf50;
+    margin-top: 0;
+    font-size: 1.2rem;
+  }
+
+  .blog-content p {
+    color: #444;
+    font-size: 0.98rem;
+    margin: 0.8rem 0 1rem;
+  }
+
+  .read-more {
+    color: #0a3362;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .read-more:hover {
+    text-decoration: underline;
+  }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .profile-pic {
+    width: 100px;
+    height: 100px;
+    bottom: -40px;
+    left: 10px;
+  }
+
+  .about-details-container {
+    margin-top: 60px;
+  }
+  .gallery {
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row on smaller screens */
+  }
+    }
+    @media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr; /* 1 item per row on very small screens */
+  }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-brand">
+      <img src="logo.jpeg" alt="Logo">
+      <div class="brand-info">
+        <h1 class="brand-name">Markas Enterprise MKE</h1>
+        <p class="slogan">Make it a Reality</p>
+      </div>
+    </div>
+    <nav>
+      <a onclick="showSection('home')">Home</a>
+      <a onclick="showSection('about')">About</a>
+      <a onclick="showSection('gallery')">Gallery</a>
+      <a onclick="showSection('support')">Support</a>
+      <a onclick="showSection('feedback')">Feedback</a>
+      <a onclick="showSection('blog')">Blog</a>
+    </nav>
+  </header>
+  
+  <main class="container">
+    <!-- Home comes first -->
+    <section class="section active" id="home">
+      <div class="intro">
+        <h2>Welcome to Markas Enterprise MKE!</h2>
+        <p>Welcome to a world where dogs steal the show and every tail tells a story! 🐾 Dive into my journey filled with heartwarming canine adventures, stories I've poured my soul into, and a community of like-minded dog lovers. Join me on this exciting adventure—explore my books, connect with my passion for dogs, and stay updated through my social channels!</p>
+
+        <div class="social-links">
+          <a href="https://whatsapp.com/channel/0029VaQvCIiAYlUSCFIT903y" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com/markasenterprisemke" target="_blank"><i class="fab fa-facebook"></i></a>
+          <a href="https://youtube.com/@markasenterprisemke" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="book-list">
+        <h2>My Books on Amazon KDP</h2>
+        <div class="book">
+          <img src="the tales of kito.jpeg" alt="The tales of Kito and Zuri">
+          <h3>The Tale of Kito and Zuri</h3>
+          <p>A heartwarming tale about two inseparable canine friends.</p>
+          <a href="https://www.amazon.com/dp/B0F4Q5GZXX" target="_blank">Get the kindle eBook</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Then About -->
+    <section class="section" id="about">
+      <div class="about-banner">
+        <img src="banner.jpeg" alt="Cover Image">
+        <div class="profile-pic">
+          <img src="mark-profile.jpg" alt="Mark's Profile Picture">
+        </div>
+      </div>
+      <div class="about-details-container">
+        <div class="about-details">
+          <h2>About Me</h2>
+          <p><strong>Name:</strong> Mark Oketch</p>
+          <p><strong>Profession:</strong> Frontend Developer</p>
+          <p><strong>Interests:</strong> Dogs, Writing, Coding, Nature Observation, Traveling</p>
+          <p>I’m passionate about dogs—not just writing their stories but understanding them on a deeper level. I love observing their behavior, researching different breeds, and learning what makes each dog unique. Whether I’m watching them play, reading about their instincts, or writing their tales, it all feeds into my curiosity and love for them. Being a Dogtrovert means I feel most alive when I’m surrounded by dogs or talking about them, and that’s the energy I bring into everything I create.</p>
+          <p><strong>Official Links:</strong></p>
+          <p class="social-links">
+            <a href="https://facebook.com/oketchmarko45" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://x.com/oketchmarko45" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://wa.me/254712711088" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://instagram.com/oketchmarko45" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/oketchmarko45" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/oketchmarko45" target="_blank"><i class="fab fa-linkedin"></i></a>
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" id="gallery">
+      <h2>Dog Gallery</h2>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="relaxed.jpg" alt="Dog Image" width="100%">
+          <p>relaxing afternoon vibes.</p>
+        </div>
+        <div class="gallery-item">
+          <img src="play.jpg" alt="Dog Image" width="100%">
+          <p>its play time.</p>
+        </div>
+        <div class="gallery-item">
+          <img src="scoob.jpg" alt="Dog Image" width="100%">
+          <p>My furry buddy during a walk.</p>
+        </div>
+        <div class="gallery-item">
+          <img src="listening.jpg" alt="Dog Image" width="100%">
+          <p>He is trying to pay attention .</p>
+        </div>
+        <div class="gallery-item">
+          <img src="wrong.jpg" alt="Dog Image" width="100%">
+          <p>No! I didn't do anything wrong.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="support">
+      <h2>Support My Work</h2>
+      <p>If you appreciate my content and would like to support me, you can do so using the methods below. Every bit of support goes a long way!</p>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+        <!-- PayPal -->
+        <div style="background: #fff; padding: 1rem; border-left: 4px solid #0070ba; border-radius: 6px;">
+          <h3><i class="fab fa-paypal"></i> PayPal</h3>
+          <p>You can support me via PayPal using the button below:</p>
+          <a href="https://www.paypal.com/ncp/payment/49GD9DXGBM5J6" target="_blank" style="background: #0070ba; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Send via PayPal</a>
+        </div>
+
+       <!-- MPESA -->
+       <div style="background: #fff; padding: 1rem; border-left: 4px solid #4caf50; border-radius: 6px;">
+<h3>Send Support via M-PESA</h3>
+<form action="stk_push.php" method="POST">
+  <label for="phone">Phone Number (2547XXXXXXXX):</label>
+  <input type="text" id="phone" name="phone" required>
+
+  <label for="amount">Amount (KES):</label>
+  <input type="number" id="amount" name="amount" required>
+
+  <button type="submit">Pay with M-PESA</button>
+</form>
+       </div>
+
+<!-- Backup Buy Goods Till Option -->
+<div class="mpesa-manual">
+  <p><strong>Alternatively, use Buy Goods Till Number:</strong></p>
+  <div class="till-number">8861950</div>
+  <small>Enter this Till Number in your M-PESA app under “Buy Goods and Services.”</small>
+</div>
+
+        <!-- Bank Transfer -->
+        <div style="background: #fff; padding: 1rem; border-left: 4px solid #444; border-radius: 6px;">
+          <h3><i class="fas fa-university"></i> Bank Transfer</h3>
+          <p>You can make a bank deposit or transfer using the following details:</p>
+          <ul style="list-style-type: none; padding: 0;">
+            <li><strong>Bank:</strong> Standard Charted Bank</li>
+            <li><strong>Account Name:</strong> Mark Oketch</li>
+            <li><strong>Paybill:</strong> 329329</li>
+            <li><strong>Account Number:</strong> 0100428580200</li>
+            <li><strong>Branch:</strong> Thika</li>
+          </ul>
+          <a href="#" style="background: #444; color: white; padding: 0.6rem 1.2rem; text-decoration: none; border-radius: 4px; display: inline-block;">Make Bank Transfer</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="feedback">
+      <h2>Feedback</h2>
+      <p>We'd love to hear from you! Please fill out the form below to share your suggestions or complaints. Your feedback goes directly to our records via Google Sheets.</p>
+      <form id="feedbackForm" method="POST" action="https://script.google.com/macros/s/AKfycbwDEY9ib2zDlnz0FKz91jBnn8PLlUim3ZwbmDMTAcpiYPSYWEQ8wUINDjuNB7vjkfGt/exec">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required>
+      
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+      
+        <label for="phone">Phone:</label>
+        <input type="text" name="phone">
+      
+        <label for="message">Message:</label>
+        <textarea name="message" required></textarea>
+      
+        <button type="submit">Send Feedback</button>
+      </form>
+      
+      
+    </section>
+
+    <section class="section" id="blog">
+      <div class="blog-container">
+        <h2>🐶 My Blog</h2>
+        <p class="intro-text">
+          Explore my latest dog adventures, tips, and behind-the-scenes reflections from a true Dogtrovert. 💚
+        </p>
+    
+        <div class="blog-list">
+          <div class="blog-card">
+            <img src="kito-journey.jpg" alt="Kito's Journey">
+            <div class="blog-content">
+              <h3>Kito's Journey: From Stray to Star 🌟</h3>
+              <p>Discover how Kito, a shy street pup, became the heart of our dog family and inspired the Dogtrovert journey.</p>
+              <a href="https://markasenterprisemke.wordpress.com/" class="read-more">Read More →</a>
+            </div>
+          </div>
+    
+          <div class="blog-card">
+            <img src="dog-training.jpg" alt="Training Tips">
+            <div class="blog-content">
+              <h3>5 Dog Training Tips Every Owner Should Know 🐾</h3>
+              <p>Whether you’re a first-time dog parent or a seasoned one, these training tips will bring out the best in your furry friend.</p>
+              <a href="https://markasenterprisemke.wordpress.com/" class="read-more">Read More →</a>
+            </div>
+          </div>
+    
+          <div class="blog-card">
+            <img src="dogtrovert-life.jpg" alt="Life as a Dogtrovert">
+            <div class="blog-content">
+              <h3>The Dogtrovert Life: What It Means and Why I Live It 🐕</h3>
+              <p>Here’s what being a Dogtrovert truly means and how it’s helped me connect with dogs on a deeper, soulful level.</p>
+              <a href="https://markasenterprisemke.wordpress.com/" class="read-more">Read More →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <h4>Markas Enterprise MKE</h4>
+    <p>Created by Ochieng' Mark Oketch – Dogtrovert, Writer, Developer</p>
+    <p>Contact : <a href="mailto:oketchmarko45@gmail.com">Mark via mail</a></p>
+
+    <p id="copyright"></p>
+  </footer>
+
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('nav a');
+
+      sections.forEach(section => section.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+
+      navLinks.forEach(link => {
+        link.classList.remove('active-link');
+        if (link.textContent.toLowerCase() === id) {
+          link.classList.add('active-link');
+        }
+      });
+    }
+
+    const form = document.getElementById('feedbackForm');
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData
+    });
+    const result = await response.json();
+    if (result.result === "success") {
+      window.location.href = result.redirect;
+    } else {
+      alert("There was an error submitting your feedback.");
+    }
+  });
+
+    const currentYear = new Date().getFullYear();
+    const establishedYear = 2024;
+    const yearText = currentYear === establishedYear 
+      ? `© ${currentYear}` 
+      : `© ${establishedYear} - ${currentYear}`;
+
+    document.getElementById("copyright").innerHTML = `${yearText} Markas Enterprise MKE. All rights reserved.`;
+  </script>
+</body>
+</html>
