@@ -262,6 +262,19 @@
       cursor: pointer;
       border-radius: 4px;
     }
+    #submitBtn {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+#submitBtn.left {
+  transform: translateX(-100px);
+}
+
+#submitBtn.right {
+  transform: translateX(100px);
+}
+
     footer {
       background: #2e2e2e;
       color: #ccc;
@@ -566,7 +579,7 @@
         <label for="message">Message:</label>
         <textarea name="message" required></textarea>
       
-        <button type="submit">Send Feedback</button>
+        <button id="submitBtn" type="submit">Send Feedback</button>
       </form>
       
       
@@ -658,6 +671,39 @@
       : `© ${establishedYear} - ${currentYear}`;
 
     document.getElementById("copyright").innerHTML = `${yearText} Markas Enterprise MKE. All rights reserved.`;
+
+   /* const form = document.getElementById('feedbackForm');*/
+const button = document.getElementById('submitBtn');
+
+let toggle = false;
+
+button.addEventListener('mouseover', () => {
+  if (!isFormFilled()) {
+    // Move left or right
+    button.classList.remove('left', 'right');
+    button.classList.add(toggle ? 'left' : 'right');
+    toggle = !toggle;
+  } else {
+    button.classList.remove('left', 'right');
+  }
+});
+
+// Check form before submitting
+form.addEventListener('submit', (e) => {
+  if (!isFormFilled()) {
+    e.preventDefault(); // stop submission if form isn't filled
+    alert("Please fill in all fields!");
+  }
+});
+
+function isFormFilled() {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const feedback = document.getElementById('feedback').value.trim();
+
+  return name !== "" && email !== "" && feedback !== "";
+}
+
   </script>
 </body>
 </html>
