@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no" />
   <title>Markas Enterprise MKE</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" type="image/png" href="logo.png">
@@ -22,6 +22,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
     }
     header {
       background-color: #0a3362;
@@ -100,6 +101,16 @@
       margin: 2rem auto;
       padding: 0 1rem;
     }
+    .intro img, .book img {
+  max-width: 100%;
+  height: auto;
+}
+.intro, .book-list {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+
     .section {
       display: none;
     }
@@ -369,6 +380,28 @@
     grid-template-columns: 1fr; /* 1 item per row on very small screens */
   }
 }
+@media (max-width: 400px) {
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  p, a, h3 {
+    font-size: 0.95rem;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+  }
+
+  .brand-name {
+    font-size: 1.2rem;
+  }
+
+  .slogan {
+    font-size: 0.8rem;
+  }
+}
+
   </style>
 </head>
 <body>
