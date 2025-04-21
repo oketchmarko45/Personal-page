@@ -117,6 +117,36 @@
     .section.active {
       display: block;
     }
+
+    /* Container for social links and portfolio button */
+.social-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Styling for social links */
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+/* Portfolio button */
+.portfolio-btn {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.portfolio-btn:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
     .social-links a {
       margin: 0 0.5rem;
       font-size: 1.5rem;
@@ -484,6 +514,8 @@
             <a href="https://github.com/oketchmarko45" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/in/oketchmarko45" target="_blank"><i class="fab fa-linkedin"></i></a>
           </p>
+            <!-- Portfolio Button -->
+        <a href="portfolio.html" class="portfolio-btn">Portfolio</a>
         </div>
       </div>
     </section>
