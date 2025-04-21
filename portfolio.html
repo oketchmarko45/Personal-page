@@ -1,91 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Portfolio - Mark Oketch</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="paw-icon.svg" type="image/svg+xml">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oketch Mark Portfolio </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mediaqueries.css">
 </head>
 <body>
-  <!-- Header Section -->
-  <header>
-    <div class="logo-brand">
-      <img src="profile-pic.jpg" alt="Mark's Logo">
-      <div class="brand-info">
-        <h1 class="brand-name">Mark Oketch</h1>
-        <p class="slogan">Tech, Art, and Everything In Between</p>
-      </div>
+
+<nav id="desktop-nav">
+        <div class="logo">Oketch Mark </div>
+        <div>
+            <ul class="nav-link">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contacts">Contact</a></li>
+            </ul>
+        </div>
+</nav>
+
+<nav id="hamburger-nav">
+            <div class="logo">Oketch Mark</div>
+            <div class="hamburger-menu">
+                <div class="hamburger-icon" onclick="togglemenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="menu-link">
+                   <li><a href="#about" onclick="togglemenu()">About</a></li>
+                   <li><a href="#experience" onclick="togglemenu()">Experience</a></li>
+                   <li><a href="#projects" onclick="togglemenu()">Projects</a></li>
+                 <li><a href="#contacts" onclick="togglemenu()">Contact</a></li>
+                   
+                </div>
+            </div>
+</nav>  
+
+<section id="profile">
+            <div class="section__pic-container">
+                <img src="./assets/pictures/profile_pic.png" 
+                alt="Oketch Mark profile picture">
+            </div>
+           <div class="section__text">
+                <p class="section__text__p1">Hello, I'm</p>
+                <h1 class="title">Oketch Mark</h1>
+                <p class="section__text__p2">Frontend Developer</p>
+                    <div class="btn-container">
+                        <button
+                         class="btn btn-color-2" 
+                         onclick="window.open('./assets/Mark Oketch CV 2023-2024.pdf')">
+                            Download CV
+                        </button>
+                    
+                        <button
+                         class="btn btn-color-1" 
+                         onclick="location.href='./#contacts'">
+                            Contact Info
+                        </button>
+                    </div>
+
+                    <div id="socials-container">
+                        <img 
+                        src="./assets/pictures/linkedin.png" 
+                        alt="My Linkedin profile" class="icon"
+                        onclick="location.href='https://www.linkedin.com/in/oketchmarko45'"
+                        />
+                   
+                        <img 
+                        src="./assets/pictures/github.png" 
+                        alt="My github profile" class="icon"
+                        onclick="location.href='https://github.com/markoketch'"
+                        />
+                    
+                        <img src="./assets/pictures/whatsapp.png" 
+                        alt="My whatsapp number" class="icon"
+                        onclick="location.href='https://wa.me/message/VQBKPKMSXYJWM1'"
+                         />          
+
+                        <img src="./assets/pictures/facebook.png" 
+                        alt="My facebook profile" class="icon"
+                        onclick="location.href='https://www.facebook.com/oketchmarko45/'"
+                        /> 
+
+                        <img src="./assets/pictures/x.jpg" 
+                        alt="My x profile" class="icon"
+                        onclick="location.href='https://twitter.com/oketchmarko45'"
+                        /> 
+                    
+                    </div>
+            </div>
+</section>
+
+<section id="about">
+              <p class="section__text__p1">Get To Know More</p>
+              <h1 class="title">About Me</h1>
+              <div class="section-container">
+                <div class="section__pic-container">
+                    <img src="./assets/pictures/about-pic.jpg" 
+                    alt="profile picture"
+                    class="about-pic"
+                />
+                </div>
+                
+                <div class="about-details-container">
+                    <div class="about-containers">
+                        <div class="details-container">
+                            <img src="./assets/pictures/experince.png"
+                            alt="experience icon"
+                            class="icon"
+                            />
+                            <h3>Experience</h3>
+                            <p>2+ years<br> Frontend Development</p>
+                        </div>
+                        <div class="details-container">
+                            <img src="./assets/pictures/education.png"
+                            alt="Education icon"
+                            class="icon"
+                            />
+                            <h3>Education</h3>
+                            <p>Business Information Technology Diploma<br> M.Sc.Masters Degree</p>
+                        </div>
+                    </div>
+                    <div class="text-container">
+                        <p>
+                            Passionate about staying up-to-date with the latest advancements in the technology industry, 
+                            I actively seek opportunities for professional development and continuous learning.
+                            I am excited to contribute my technical skills, enthusiasm, 
+                            and dedication to a forward-thinking organization that values innovation 
+                            and embraces the trans-formative power of technology.
+                        </p>
+                    </div>
+                </div>
+              </div>
+              <img src="./assets/pictures/arrow down.jpg"
+               alt="Arrow icon" class="icon arrow"
+               onclick="location.href='./#experience'">
+</section>
+
+<section id="experience">
+            <p class="section__text__p1">Explore My</p>
+            <h1 class="title">Experience</h1>
+            <div class="experience-details-container">
+               <div class="about-containers">
+                    <div class="details-container">
+                        <h2 class="experience-sub-title">Frontend Development</h2>
+                    <div class="article-container">
+                        <article>
+                            <img 
+                            src="./assets/pictures/checkmark.png"
+                            alt="Experience icon"
+                            class="icon"
+                            />
+                            <div>
+                                <h3>HTML</h3>
+                                <p>Experienced</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img 
+                            src="./assets/pictures/checkmark.png"
+                            alt="Experience icon"
+                            class="icon"
+                            />
+                            <div>
+                                <h3>CSS</h3>
+                                <p>Experienced</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img 
+                            src="./assets/pictures/checkmark.png"
+                            alt="Experience icon"
+                            class="icon"
+                            />
+                            <div>
+                                <h3>SASS</h3>
+                                <p>Basic</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img 
+                            src="./assets/pictures/checkmark.png"
+                            alt="Experience icon"
+                            class="icon"
+                            />
+                            <div>
+                                <h3>JavaSCript</h3>
+                                <p>Basic</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img 
+                            src="./assets/pictures/checkmark.png"
+                            alt="Experience icon"
+                            class="icon"
+                            />
+                            <div>
+                                <h3>TypeScript</h3>
+                                <p>Basic</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img 
+                            src="./assets/pictures/checkmark.png"
+                            alt="Experience icon"
+                            class="icon"
+                            />
+                            <div>
+                                <h3>Material UI</h3>
+                                <p>Basic</p>
+                            </div>
+                        </article>
+                    </div>
+                    </div>
+                    <div class="details-container">       
+                     <h2 class="experience-sub-title">Backend Development</h2>
+                    <div class="article-container">
+                        <article>
+                            <img 
+                            src="./assets/pictures/checkmark.png"
+                            alt="Experience icon"
+                            class="icon"
+                            />
+                            <div>
+                                <h3>PostgreSQL</h3>
+                                <p>Basic</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img 
+                            src="./assets/pictures/checkmark.png"
+                            alt="Experience icon"
+                            class="icon"
+                            />
+                            <div>
+                                <h3>Node JS</h3>
+                                <p>Basic</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img 
+                            src="./assets/pictures/checkmark.png"
+                            alt="Experience icon"
+                            class="icon"
+                            />
+                            <div>
+                                <h3>Express JS</h3>
+                                <p>Basic</p>
+                            </div>
+                        </article>
+                        <article>
+                            <img 
+                            src="./assets/pictures/checkmark.png"
+                            alt="Experience icon"
+                            class="icon"
+                            />
+                            <div>
+                                <h3>Git</h3>
+                                <p>Basic</p>
+                            </div>
+                        </article>
+                       
+                    </div>
+                    </div>
+               </div>
+            </div>
+            <img src="./assets/pictures/arrow down.jpg"
+            alt="Arrow icon" class="icon arrow"
+            onclick="location.href='./#projects'">
+</section>
+
+<section id="projects">
+                <p class="section__text__p1">Brouse My Resent</p>
+                <h1 class="title">Projects</h1>
+                  <div class="experience-details-container">
+                    <div class="about-containers">
+                    <div class="details-container color-container">
+                        <div class="article-container">
+                                  <img 
+                                  src="./assets/pictures/project 1.jpg"
+                                  alt="project 1"
+                                  class="project_img"
+                                  />
+                              <h2 class="experience-sub-title project-title">Project One</h2>
+                            <div class="btn-container">
+                               <button class="btn btn-color-2 project btn" onclick="location.
+                               href='https://github.com/'">
+                               Github
+                               </button>
+
+                                <button class="btn btn-color-2 project btn" onclick="location.
+                                href='https://github.com/'">
+                                Live Demo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="details-container color-container">
+                       <div class="article-container">
+                           <img 
+                           src="./assets/pictures/project 2.jpg"
+                           alt="project 2"
+                           class="project_img"
+                           />
+                        <h2 class="experience-sub-title project-title">Project Two</h2>
+                       <div class="btn-container">
+                           <button class="btn btn-color-2 project btn" onclick="location.
+                              href='https://github.com/'">
+                              Github
+                           </button>
+
+                           <button class="btn btn-color-2 project btn" onclick="location.
+                             href='https://github.com/'">
+                             Live Demo
+                           </button>
+
+                       </div>
+                    </div>
+                </div>
+       
+            <div class="details-container color-container">
+                <div class="article-container">
+                      <img 
+                      src="./assets/pictures/project 3.jpg"
+                      alt="project 3"
+                      class="project_img"
+                      />
+                     <h2 class="experience-sub-title project-title">Project Three</h2>
+                    <div class="btn-container">
+                         <button class="btn btn-color-2 project btn" onclick="location.
+                         href='https://github.com/'">
+                         Github
+                        </button>
+
+                        <button class="btn btn-color-2 project btn"    onclick="location.
+                         href='https://github.com/'">
+                         Live Demo
+                         </button>
+
+                     </div>
+                 </div>
+            </div>
+        </div>
     </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="portfolio.html" class="active-link">Portfolio</a>
-      <a href="index.html#blog" class="active-link">Blog</a> <!-- Updated Blog Link -->
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+              <img src="./assets/pictures/arrow down.jpg"
+               alt="Arrow icon" class="icon arrow"
+               onclick="location.href='./#contacts'"
+               >
+</section>
 
-  <!-- Main Portfolio Content -->
-  <main>
-    <section class="social-container">
-      <div class="social-links">
-        <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://github.com" target="_blank" aria-label="GitHub">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://twitter.com" target="_blank" aria-label="Twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </div>
-      <a href="portfolio.html" class="portfolio-btn">View Portfolio</a>
-    </section>
+<section id="contacts">
+<p class="section__text__p1">Get In Touch</p>
+            <h1 class="title">Contact Me</h1>
+            <div class="contact-info-upper-contact">
+                <div class="contact-info-container">
+                    <img src="./assets/pictures/email.png" alt="email icon" class="icon contact-icon"
+                    />
+                    <p>
+                        <a href="mailto:oketchmarko45@gmail.com">Oketchmarko45@gmail.com</a>
+                    </p>
+                </div>
+                <div class="contact-info-container">
+                    <img src="./assets/pictures/linkedin.png" alt="linkedin icon" class="icon contact-icon"
+                    />
+                    <p>
+                        <a href="https://www.linkedin.com/in/oketchmarko45">Linkedin</a>
+                    </p>
+                </div>
+            </div>  
 
-    <section class="container">
-      <h2>My Work</h2>
-      <p>Below are some of the projects I've worked on, ranging from personal projects to professional assignments.</p>
+        </section>
 
-      <!-- Portfolio Projects -->
-      <div class="gallery">
-        <div class="gallery-item">
-          <img src="project1.jpg" alt="Project 1">
-          <p>Project One: Web Development</p>
-        </div>
-        <div class="gallery-item">
-          <img src="project2.jpg" alt="Project 2">
-          <p>Project Two: Mobile App Design</p>
-        </div>
-        <div class="gallery-item">
-          <img src="project3.jpg" alt="Project 3">
-          <p>Project Three: Data Analysis</p>
-        </div>
-        <div class="gallery-item">
-          <img src="project4.jpg" alt="Project 4">
-          <p>Project Four: Game Development</p>
-        </div>
-        <div class="gallery-item">
-          <img src="project5.jpg" alt="Project 5">
-          <p>Project Five: UI/UX Design</p>
-        </div>
-        <div class="gallery-item">
-          <img src="project6.jpg" alt="Project 6">
-          <p>Project Six: E-commerce Development</p>
-        </div>
-      </div>
-    </section>
-  </main>
+<footer>
+            <nav>
+                <div class="nav-links-container">
+                    <ul class="nav-link">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contacts">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <p>Copyright &#169; 2024 Oketch Mark. All Rights Reserved.</p>
+</footer>
 
-  <!-- Footer Section -->
-  <footer>
-    <h4>Mark Oketch</h4>
-    <p>All rights reserved &copy; 2025</p>
-    <p>Contact: <a href="mailto:mark@example.com">mark@example.com</a></p>
-  </footer>
-
-  <!-- Add Font Awesome CDN for social icons -->
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-</body>
+<script src="script.js"></script>
+     </body>
 </html>
