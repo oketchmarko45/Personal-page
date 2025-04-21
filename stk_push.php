@@ -24,18 +24,30 @@ $Password = base64_encode($BusinessShortCode . $Passkey . $Timestamp);
 $credentials = base64_encode("$consumerKey:$consumerSecret");
 $url = 'https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
 $ch = curl_init($url);
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Basic '.$credentials]);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Basic ' . $credentials]);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($ch);
-curl_close($ch);
 
-$access_token = json_decode($response)->access_token;
+if (curl_errno($ch)) {
+    echo 'cURL Error: ' . curl_error($ch);
+    exit;
+}
+
+curl_close($ch);
+$responseData = json_decode($response);
+
+if (isset($responseData->access_token)) {
+    $access_token = $responseData->access_token;
+} else {
+    echo 'Failed to obtain access token.';
+    exit;
+}
 
 // STK push request
 $stkPushUrl = 'https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
 $headers = [
     'Content-Type: application/json',
-    'Authorization: Bearer '.$access_token
+    'Authorization: Bearer ' . $access_token
 ];
 
 $callbackURL = 'https://markocallback.infinityfreeapp.com/callback.php'; // The URL that will handle both STK and callback
@@ -61,13 +73,19 @@ curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    echo 'cURL Error: ' . curl_error($ch);
+    exit;
+}
+
 curl_close($ch);
 
 // Prompt the user
 echo "Prompt sent to $phone for KES $amount. Please check your phone.";
 
-// Callback handling
-/* ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Callback handling (uncomment and adjust accordingly)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Callback response from Safaricom
     $callbackData = file_get_contents('php://input');
     $transactionData = json_decode($callbackData, true);
@@ -93,5 +111,5 @@ echo "Prompt sent to $phone for KES $amount. Please check your phone.";
     } else {
         echo "Invalid data received from Safaricom.";
     }
-}*/
+}
 ?>
