@@ -67,7 +67,7 @@ curl_close($ch);
 echo "Prompt sent to $phone for KES $amount. Please check your phone.";
 
 // Callback handling
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+/* ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Callback response from Safaricom
     $callbackData = file_get_contents('php://input');
     $transactionData = json_decode($callbackData, true);
@@ -93,5 +93,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo "Invalid data received from Safaricom.";
     }
-}
+}*/
 ?>
