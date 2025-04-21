@@ -38,7 +38,8 @@ $headers = [
     'Authorization: Bearer '.$access_token
 ];
 
-$callbackURL = 'https://www.yourdomain.com'; // The URL that will handle both STK and callback
+$callbackURL = 'https://markocallback.infinityfreeapp.com/callback.php
+'; // The URL that will handle both STK and callback
 
 $postData = [
     'BusinessShortCode' => $BusinessShortCode,
