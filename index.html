@@ -118,6 +118,41 @@
       display: block;
     }
 
+    .book-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.book {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.coming-soon img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.coming-soon {
+  text-align: center;
+  font-style: italic;
+  color: #555;
+  background-color: #e0f7fa; /* Soft color for the coming soon section */
+}
+
+.coming-soon h3 {
+  font-size: 1.5em;
+  color: #2c3e50;
+}
+
+.coming-soon p {
+  font-size: 1em;
+}
+
     /* Container for social links and portfolio button */
 .social-container {
   display: flex;
@@ -479,15 +514,27 @@
           <a href="https://youtube.com/@markasenterprisemke" target="_blank"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
-      <div class="book-list">
-        <h2>My Books on Amazon KDP</h2>
-        <div class="book">
-          <img src="the tales of kito.jpeg" alt="The tales of Kito and Zuri">
-          <h3>The Tale of Kito and Zuri</h3>
-          <p>A heartwarming tale about two inseparable canine friends.</p>
-          <a href="https://www.amazon.com/dp/B0F4Q5GZXX" target="_blank">Get the kindle eBook</a>
-        </div>
-      </div>
+     <div class="book-list">
+  <h2>My Books on Amazon KDP</h2>
+  
+  <!-- Existing book -->
+  <div class="book">
+    <img src="the tales of kito.jpeg" alt="The Tale of Kito and Zuri">
+    <h3>The Tale of Kito and Zuri</h3>
+    <p>A heartwarming tale about two inseparable canine friends.</p>
+    <a href="https://www.amazon.com/dp/B0F4Q5GZXX" target="_blank">Get the Kindle eBook</a>
+  </div>
+
+  <!-- Coming Soon: Project Canis -->
+  <div class="book coming-soon">
+    <img src="project-canis-poster.jpg" alt="Project Canis Poster">
+    <h3>Project Canis</h3>
+    <p>He wasn't built to feel. But he learned to love. Coming Soon!</p>
+    <p><i>Stay tuned for updates on this upcoming novel.</i></p>
+  </div>
+
+</div>
+ </div>
     </section>
 
     <!-- Then About -->
