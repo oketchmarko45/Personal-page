@@ -581,18 +581,24 @@
     </div>
 
     <!-- Paystack Integration -->
-    <div style="background: #fff; padding: 1rem; border-left: 4px solid #3dc8f5; border-radius: 6px;">
-      <h3><i class="fas fa-credit-card"></i> Pay with Card or Mobile Money (via Paystack)</h3>
-      <form id="paystackForm">
-        <label for="email">Email Address:</label>
-        <input type="email" id="email-address" required placeholder="your@email.com" />
+<div style="background: #fff; padding: 1rem; border-left: 4px solid #3dc8f5; border-radius: 6px;">
+  <h3><i class="fas fa-credit-card"></i> Pay with Card or Mobile Money (via Paystack)</h3>
+  <form id="paystackForm" style="display: flex; flex-direction: column; gap: 0.8rem;">
 
-        <label for="amount">Amount (KES):</label>
-        <input type="number" id="paystack-amount" required placeholder="e.g. 500" />
+    <label for="email-address">Email Address:</label>
+    <input type="email" id="email-address" placeholder="your@email.com"
+      style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;" required>
 
-        <button type="submit">Pay via Paystack</button>
-      </form>
-    </div>
+    <label for="paystack-amount">Amount (KES):</label>
+    <input type="number" id="paystack-amount" placeholder="e.g. 500"
+      style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;" required>
+
+    <button type="submit"
+      style="background: #3dc8f5; color: white; padding: 0.5rem 1rem; text-decoration: none; border: none; border-radius: 4px; cursor: pointer;">
+      Pay via Paystack
+    </button>
+  </form>
+</div>
 
     <!-- Bank Transfer -->
     <div style="background: #fff; padding: 1rem; border-left: 4px solid #444; border-radius: 6px;">
@@ -609,28 +615,27 @@
 
   <!-- Paystack Script -->
   <script src="https://js.paystack.co/v1/inline.js"></script>
-  <script>
-    const paystackForm = document.getElementById('paystackForm');
-    paystackForm.addEventListener('submit', function (e) {
-      e.preventDefault();
+<script>
+  const paystackForm = document.getElementById('paystackForm');
+  paystackForm.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-      let handler = PaystackPop.setup({
-        key: 'pk_live_c7ab08650b0b640eb289be030544221cd3eee167', // REPLACE with your Paystack PUBLIC key
-        email: document.getElementById('email-address').value,
-        amount: document.getElementById('paystack-amount').value * 100, // Amount in kobo
-        currency: 'KES',
-        callback: function(response) {
-          alert('Payment complete! Reference: ' + response.reference);
-          // Optional: POST to server to verify
-        },
-        onClose: function() {
-          alert('Payment window closed.');
-        }
-      });
-
-      handler.openIframe();
+    let handler = PaystackPop.setup({
+      key: 'pk_live_c7ab08650b0b640eb289be030544221cd3eee167', // Replace with your actual Paystack public key
+      email: document.getElementById('email-address').value,
+      amount: document.getElementById('paystack-amount').value * 100, // Convert KES to kobo
+      currency: 'KES',
+      callback: function (response) {
+        alert('Payment complete! Reference: ' + response.reference);
+      },
+      onClose: function () {
+        alert('Payment window closed.');
+      }
     });
-  </script>
+
+    handler.openIframe();
+  });
+</script>
 </section>
 
     <section class="section" id="feedback">
