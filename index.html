@@ -547,53 +547,91 @@
     </section>
 
     <section class="section" id="support">
-      <h2>Support My Work</h2>
-      <p>If you appreciate my content and would like to support me, you can do so using the methods below. Every bit of support goes a long way!</p>
+  <h2>Support My Work</h2>
+  <p>If you appreciate my content and would like to support me, you can do so using the methods below. Every bit of support goes a long way!</p>
 
-      <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
-        <!-- PayPal -->
-        <div style="background: #fff; padding: 1rem; border-left: 4px solid #0070ba; border-radius: 6px;">
-          <h3><i class="fab fa-paypal"></i> PayPal</h3>
-          <p>You can support me via PayPal using the button below:</p>
-          <a href="https://www.paypal.com/ncp/payment/49GD9DXGBM5J6" target="_blank" style="background: #0070ba; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Send via PayPal</a>
-        </div>
+  <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
 
-       <!-- MPESA -->
-       <div style="background: #fff; padding: 1rem; border-left: 4px solid #4caf50; border-radius: 6px;">
-<h3>Send Support via M-PESA</h3>
-<form action="stk_push.php" method="POST">
-  <label for="phone">Phone Number (2547XXXXXXXX):</label>
-  <input type="text" id="phone" name="phone" required>
+    <!-- PayPal -->
+    <div style="background: #fff; padding: 1rem; border-left: 4px solid #0070ba; border-radius: 6px;">
+      <h3><i class="fab fa-paypal"></i> PayPal</h3>
+      <p>You can support me via PayPal using the button below:</p>
+      <a href="https://www.paypal.com/ncp/payment/49GD9DXGBM5J6" target="_blank" style="background: #0070ba; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">Send via PayPal</a>
+    </div>
 
-  <label for="amount">Amount (KES):</label>
-  <input type="number" id="amount" name="amount" required>
+    <!-- M-PESA -->
+    <div style="background: #fff; padding: 1rem; border-left: 4px solid #4caf50; border-radius: 6px;">
+      <h3>Send Support via M-PESA</h3>
+      <form action="stk_push.php" method="POST">
+        <label for="phone">Phone Number (2547XXXXXXXX):</label>
+        <input type="text" id="phone" name="phone" required>
 
-  <button type="submit">Pay with M-PESA</button>
-</form>
-       </div>
+        <label for="amount">Amount (KES):</label>
+        <input type="number" id="amount" name="amount" required>
 
-<!-- Backup Buy Goods Till Option -->
-<div class="mpesa-manual">
-  <p><strong>Alternatively, use Buy Goods Till Number:</strong></p>
-  <div class="till-number">8861950</div>
-  <small>Enter this Till Number in your M-PESA app under “Buy Goods and Services.”</small>
-</div>
+        <button type="submit">Pay with M-PESA</button>
+      </form>
+    </div>
 
-        <!-- Bank Transfer -->
-        <div style="background: #fff; padding: 1rem; border-left: 4px solid #444; border-radius: 6px;">
-          <h3><i class="fas fa-university"></i> Bank Transfer</h3>
-          <p>You can make a bank deposit or transfer using the following details:</p>
-          <ul style="list-style-type: none; padding: 0;">
-            <li><strong>Bank:</strong> Standard Charted Bank</li>
-            <li><strong>Account Name:</strong> Mark Oketch</li>
-            <li><strong>Paybill:</strong> 329329</li>
-            <li><strong>Account Number:</strong> 0100428580200</li>
-            <li><strong>Branch:</strong> Thika</li>
-          </ul>
-          <a href="#" style="background: #444; color: white; padding: 0.6rem 1.2rem; text-decoration: none; border-radius: 4px; display: inline-block;">Make Bank Transfer</a>
-        </div>
-      </div>
-    </section>
+    <!-- Backup Buy Goods Till Option -->
+    <div class="mpesa-manual">
+      <p><strong>Alternatively, use Buy Goods Till Number:</strong></p>
+      <div class="till-number">8861950</div>
+      <small>Enter this Till Number in your M-PESA app under “Buy Goods and Services.”</small>
+    </div>
+
+    <!-- Paystack Integration -->
+    <div style="background: #fff; padding: 1rem; border-left: 4px solid #3dc8f5; border-radius: 6px;">
+      <h3><i class="fas fa-credit-card"></i> Pay with Card or Mobile Money (via Paystack)</h3>
+      <form id="paystackForm">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email-address" required placeholder="your@email.com" />
+
+        <label for="amount">Amount (KES):</label>
+        <input type="number" id="paystack-amount" required placeholder="e.g. 500" />
+
+        <button type="submit">Pay via Paystack</button>
+      </form>
+    </div>
+
+    <!-- Bank Transfer -->
+    <div style="background: #fff; padding: 1rem; border-left: 4px solid #444; border-radius: 6px;">
+      <h3><i class="fas fa-university"></i> Bank Transfer</h3>
+      <p>You can make a bank deposit or transfer using the following details:</p>
+      <ul style="list-style-type: none; padding: 0;">
+        <li><strong>Bank:</strong> Standard Chartered Bank</li>
+        <li><strong>Account Name:</strong> Mark Oketch</li>
+        <li><strong>Account Number:</strong> 0100428580200</li>
+        <li><strong>Branch:</strong> Thika</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Paystack Script -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script>
+    const paystackForm = document.getElementById('paystackForm');
+    paystackForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      let handler = PaystackPop.setup({
+        key: 'pk_live_c7ab08650b0b640eb289be030544221cd3eee167', // REPLACE with your Paystack PUBLIC key
+        email: document.getElementById('email-address').value,
+        amount: document.getElementById('paystack-amount').value * 100, // Amount in kobo
+        currency: 'KES',
+        callback: function(response) {
+          alert('Payment complete! Reference: ' + response.reference);
+          // Optional: POST to server to verify
+        },
+        onClose: function() {
+          alert('Payment window closed.');
+        }
+      });
+
+      handler.openIframe();
+    });
+  </script>
+</section>
 
     <section class="section" id="feedback">
       <h2>Feedback</h2>
