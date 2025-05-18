@@ -95,6 +95,52 @@
       font-weight: bold;
     }
 
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropbtn {
+    background-color: #0b3d91;
+    color: white;
+    padding: 10px 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+  }
+
+  .dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown:hover .dropbtn {
+    background-color: #062c6b;
+  }
+
+
     main {
       flex: 1;
     }
@@ -498,8 +544,13 @@
       <a onclick="showSection('home')">Home</a>
       <a onclick="showSection('about')">About</a>
       <a onclick="showSection('Kennel')">Kennel</a>
-      <a onclick="showSection('petstore')">Pet store</a>
-      <a onclick="showSection('books')">Book Store</a>
+      <div class="dropdown">
+  <button class="dropbtn">stores available</button>
+  <div class="dropdown-content">
+    <a href="#" onclick="showSection('petstore')">Pet Store</a>
+    <a href="#" onclick="showSection('books')">Book Store</a>
+  </div>
+</div>
       <a onclick="showSection('gallery')">Gallery</a>
       <a onclick="showSection('support')">Support</a>
       <a onclick="showSection('feedback')">Feedback</a>
