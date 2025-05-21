@@ -159,7 +159,151 @@
   overflow-wrap: break-word;
 }
 
+    /* Cart Styles */
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 350px;
+  height: 100vh;
+  background: white;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+  transition: right 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
 
+.cart-sidebar.open {
+  right: 0;
+}
+
+.cart-header {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.cart-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.cart-item-info {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.cart-item-remove {
+  color: #ff5252;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-footer {
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  text-align: right;
+}
+
+.cart-toggle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #0a3362;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 999;
+  border: none;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #f4f404;
+  color: #0a3362;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#checkout-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+#checkout-btn:hover {
+  background: #45a049;
+}
+
+.close-cart {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+    .cart-notification {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  background: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  animation: slideIn 0.3s, fadeOut 0.5s 1.5s forwards;
+  z-index: 1001;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+    
     .section {
       display: none;
     }
@@ -559,6 +703,28 @@
   </header>
   
   <main class="container">
+
+    <!-- Shopping Cart Sidebar -->
+<div id="cart-sidebar" class="cart-sidebar">
+  <div class="cart-header">
+    <h3>Your Cart (<span id="cart-count">0</span>)</h3>
+    <button class="close-cart">&times;</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <!-- Cart items will be added here dynamically -->
+  </div>
+  <div class="cart-footer">
+    <p>Total: KSh <span id="cart-total">0.00</span></p>
+    <button id="checkout-btn">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- Cart Toggle Button -->
+<button id="cart-toggle" class="cart-toggle">
+  <i class="fas fa-shopping-cart"></i>
+  <span id="cart-badge" class="cart-badge">0</span>
+</button>
+    
     <!-- Home comes first -->
     <section class="section active" id="home">
       <div class="intro">
@@ -660,45 +826,45 @@
     <h2>Pet Store</h2>
     <div class="gallery">
         <div class="gallery-item product">
-            <img src="dog-food.jpg" alt="Dog Food - Premium Blend" width="100%">
+            <img src="dog-food.jpg" alt="Dog Food - Premium Blend" width="100%" loading="lazy">
             <h3>Dog Food - Premium Blend</h3>
             <p>High-quality dog food made with natural ingredients to keep your furry friend healthy and happy.</p>
-            <p>Price: $29.99</p>
-            <button onclick="alert('Added to cart: Dog Food - Premium Blend')">Buy Now</button>
+             <p class="price">Price: KSh 1,299.99</p>
+             <button>Add to Cart</button>
         </div>
         <div class="gallery-item product">
-            <img src="cat-toy.jpg" alt="Cat Toy - Feather Wand" width="100%">
+            <img src="cat-toy.jpg" alt="Cat Toy - Feather Wand" width="100%" loading="lazy">
             <h3>Cat Toy - Feather Wand</h3>
             <p>Engage your cat with this fun feather wand toy that promotes exercise and play.</p>
-            <p>Price: $12.99</p>
-            <button onclick="alert('Added to cart: Cat Toy - Feather Wand')">Buy Now</button>
+            <p class="price">Price: KSh 1,299.99</p>
+            <button>Add to Cart</button>
         </div>
         <div class="gallery-item product">
-            <img src="dog-bed.jpg" alt="Dog Bed - Cozy Retreat" width="100%">
+            <img src="dog-bed.jpg" alt="Dog Bed - Cozy Retreat" width="100%" loading="lazy">
             <h3>Dog Bed - Cozy Retreat</h3>
             <p>A comfortable and stylish dog bed that provides a perfect resting place for your pet.</p>
-            <p>Price: $49.99</p>
-            <button onclick="alert('Added to cart: Dog Bed - Cozy Retreat')">Buy Now</button>
+             <p class="price">Price: KSh 1,299.99</p>
+             <button>Add to Cart</button>
         </div>
         <div class="gallery-item product">
-            <img src="cat-litter.jpg" alt="Cat Litter - Odor Control" width="100%">
+            <img src="cat-litter.jpg" alt="Cat Litter - Odor Control" width="100%" loading="lazy">
             <h3>Cat Litter - Odor Control</h3>
             <p>High-performance cat litter that controls odors and keeps your home fresh.</p>
-            <p>Price: $19.99</p>
-            <button onclick="alert('Added to cart: Cat Litter - Odor Control')">Buy Now</button>
+            <p class="price">Price: KSh 1,299.99</p>
+             <button>Add to Cart</button>
         </div>
     </div>
 </section>
 
     <section class="section" id="books">
     <h2>Book Store</h2>
-    <div class="book-list
+    <div class="book-list">
 
       <div class="book">
     <img src="the tales of kito.jpeg" alt="The Tale of Kito and Zuri" style="cursor: pointer;" onclick="window.open('https://www.amazon.com/dp/B0F4Q5GZXX', '_blank')>
     <h3>The Tale of Kito and Zuri</h3>
     <p>A heartwarming tale about two inseparable canine friends.</p>
-      <button onclick="alert('Added to cart: Understanding Your Dog')">Buy Now</button>
+      <button onclick="addToCart('The Tale of Kito and Zuri')">Buy Now</button>
       </div>
 
    <!-- Coming Soon: Project Canis -->
@@ -1018,6 +1184,142 @@ function isFormFilled() {
             addToCart(itemName);
         });
     });
+
+    // Cart functionality
+const cart = {
+  items: [],
+  total: 0,
+  
+  addItem: function(item) {
+    const existingItem = this.items.find(i => i.id === item.id);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      this.items.push({...item, quantity: 1});
+    }
+    this.updateCart();
+  },
+  
+  removeItem: function(id) {
+    this.items = this.items.filter(item => item.id !== id);
+    this.updateCart();
+  },
+  
+  updateCart: function() {
+    this.total = this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    this.renderCart();
+    this.updateCartCount();
+    this.saveToLocalStorage();
+  },
+  
+  renderCart: function() {
+    const cartItemsEl = document.getElementById('cart-items');
+    cartItemsEl.innerHTML = '';
+    
+    if (this.items.length === 0) {
+      cartItemsEl.innerHTML = '<p>Your cart is empty</p>';
+      return;
+    }
+    
+    this.items.forEach(item => {
+      const itemEl = document.createElement('div');
+      itemEl.className = 'cart-item';
+      itemEl.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="cart-item-info">
+          <h4>${item.name}</h4>
+          <p>KSh ${item.price} x ${item.quantity}</p>
+        </div>
+        <button class="cart-item-remove" data-id="${item.id}">&times;</button>
+      `;
+      cartItemsEl.appendChild(itemEl);
+    });
+    
+    document.getElementById('cart-total').textContent = this.total.toFixed(2);
+  },
+  
+  updateCartCount: function() {
+    const count = this.items.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cart-count').textContent = count;
+    document.getElementById('cart-badge').textContent = count;
+  },
+  
+  saveToLocalStorage: function() {
+    localStorage.setItem('cart', JSON.stringify(this.items));
+  },
+  
+  loadFromLocalStorage: function() {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      this.items = JSON.parse(savedCart);
+      this.updateCart();
+    }
+  }
+};
+
+// Initialize cart
+document.addEventListener('DOMContentLoaded', function() {
+  cart.loadFromLocalStorage();
+  
+  // Toggle cart visibility
+  document.getElementById('cart-toggle').addEventListener('click', function() {
+    document.getElementById('cart-sidebar').classList.add('open');
+  });
+  
+  document.querySelector('.close-cart').addEventListener('click', function() {
+    document.getElementById('cart-sidebar').classList.remove('open');
+  });
+  
+  // Remove item from cart
+  document.getElementById('cart-items').addEventListener('click', function(e) {
+    if (e.target.classList.contains('cart-item-remove')) {
+      const id = e.target.getAttribute('data-id');
+      cart.removeItem(id);
+    }
+  });
+  
+  // Checkout button
+  document.getElementById('checkout-btn').addEventListener('click', function() {
+    alert(`Proceeding to checkout. Total: KSh ${cart.total.toFixed(2)}`);
+    // In a real implementation, you would redirect to a checkout page
+  });
+});
+
+// Modify your existing addToCart function
+function addToCart(productName, productPrice, productImage, productId) {
+  cart.addItem({
+    id: productId || productName.toLowerCase().replace(/\s+/g, '-'),
+    name: productName,
+    price: parseFloat(productPrice),
+    image: productImage || 'placeholder.jpg'
+  });
+  
+  // Show cart sidebar when adding an item
+  document.getElementById('cart-sidebar').classList.add('open');
+  
+  // Optional: Show a quick confirmation
+  const notification = document.createElement('div');
+  notification.className = 'cart-notification';
+  notification.textContent = `${productName} added to cart!`;
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.remove();
+  }, 2000);
+}
+
+// Update your product buttons to use the new addToCart function
+document.querySelectorAll('.product button, .book button').forEach(button => {
+  button.addEventListener('click', function() {
+    const product = this.closest('.product, .book');
+    const name = product.querySelector('h3').textContent;
+    const priceText = product.querySelector('p:last-of-type')?.textContent || '0';
+    const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
+    const image = product.querySelector('img')?.src || '';
+    
+    addToCart(name, price, image);
+  });
+});
 
   </script>
 </body>
