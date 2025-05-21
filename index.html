@@ -282,25 +282,25 @@
   color: #666;
 }
 
-    .cart-notification {
+   .cart-notification {
   position: fixed;
   bottom: 100px;
   right: 30px;
   background: #4CAF50;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border-radius: 4px;
-  animation: slideIn 0.3s, fadeOut 0.5s 1.5s forwards;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   z-index: 1001;
+  animation: slideIn 0.3s ease-out, fadeOut 0.5s ease-in 1.5s forwards;
 }
 
 @keyframes slideIn {
-  from { transform: translateY(50px); opacity: 0; }
+  from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; }
   to { opacity: 0; }
 }
     
@@ -836,22 +836,22 @@
             <img src="cat-toy.jpg" alt="Cat Toy - Feather Wand" width="100%" loading="lazy">
             <h3>Cat Toy - Feather Wand</h3>
             <p>Engage your cat with this fun feather wand toy that promotes exercise and play.</p>
-            <p class="price">Price: KSh 1,299.99</p>
-            <button>Add to Cart</button>
+            <p class="price" data-price="1299.99">KSh 1,299.99</p>
+  <button class="add-to-cart">Add to Cart</button>
         </div>
         <div class="gallery-item product">
             <img src="dog-bed.jpg" alt="Dog Bed - Cozy Retreat" width="100%" loading="lazy">
             <h3>Dog Bed - Cozy Retreat</h3>
             <p>A comfortable and stylish dog bed that provides a perfect resting place for your pet.</p>
-             <p class="price">Price: KSh 1,299.99</p>
-             <button>Add to Cart</button>
+            <p class="price" data-price="1299.99">KSh 1,299.99</p>
+  <button class="add-to-cart">Add to Cart</button>
         </div>
         <div class="gallery-item product">
             <img src="cat-litter.jpg" alt="Cat Litter - Odor Control" width="100%" loading="lazy">
             <h3>Cat Litter - Odor Control</h3>
             <p>High-performance cat litter that controls odors and keeps your home fresh.</p>
-            <p class="price">Price: KSh 1,299.99</p>
-             <button>Add to Cart</button>
+           <p class="price" data-price="1299.99">KSh 1,299.99</p>
+  <button class="add-to-cart">Add to Cart</button>
         </div>
     </div>
 </section>
@@ -864,8 +864,8 @@
     <img src="the tales of kito.jpeg" alt="The Tale of Kito and Zuri" style="cursor: pointer;" onclick="window.open('https://www.amazon.com/dp/B0F4Q5GZXX', '_blank')>
     <h3>The Tale of Kito and Zuri</h3>
     <p>A heartwarming tale about two inseparable canine friends.</p>
-     <p class="price">Price: KSh 299</p>
-        <button>Add to Cart</button>
+    <p class="price" data-price="499.99">KSh 499.99</p>
+  <button class="add-to-cart">Buy Now</button>
       </div>
 
    <!-- Coming Soon: Project Canis -->
@@ -874,6 +874,9 @@
     <h3>Project Canis</h3>
     <p>He wasn't built to feel. But he learned to love. Coming Soon!</p>
     <p><i>Stay tuned for updates on this upcoming novel.</i></p>
+    <!--<p class="price" data-price="499.99">KSh 499.99</p>
+  <button class="add-to-cart">Buy Now</button>
+    -->
   </div>
       <!--
         <div class="book">
@@ -1165,40 +1168,25 @@ function isFormFilled() {
   return name !== "" && email !== "" && feedback !== "";
 }
 
-    // Function to handle adding items to the cart
-    function addToCart(itemName) {
-        alert(`${itemName} has been added to your cart!`);
-        // Here you can implement actual cart functionality
-    }
-
-    // Example of how to attach the addToCart function to buttons
-    document.querySelectorAll('.product button').forEach(button => {
-        button.addEventListener('click', function() {
-            const itemName = this.parentElement.querySelector('h3').innerText; // Get the item name
-            addToCart(itemName);
-        });
-    });
-
-    document.querySelectorAll('.book button').forEach(button => {
-        button.addEventListener('click', function() {
-            const itemName = this.parentElement.querySelector('h3').innerText; // Get the book name
-            addToCart(itemName);
-        });
-    });
-
-    // Cart functionality
+  // Improved Cart Functionality
 const cart = {
   items: [],
-  total: 0,
   
   addItem: function(item) {
+    // Check if item already exists in cart
     const existingItem = this.items.find(i => i.id === item.id);
+    
     if (existingItem) {
       existingItem.quantity += 1;
     } else {
-      this.items.push({...item, quantity: 1});
+      this.items.push({
+        ...item,
+        quantity: 1
+      });
     }
+    
     this.updateCart();
+    this.showNotification(`${item.name} added to cart`);
   },
   
   removeItem: function(id) {
@@ -1207,42 +1195,57 @@ const cart = {
   },
   
   updateCart: function() {
-    this.total = this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    this.renderCart();
-    this.updateCartCount();
-    this.saveToLocalStorage();
-  },
-  
-  renderCart: function() {
+    // Update cart UI
     const cartItemsEl = document.getElementById('cart-items');
     cartItemsEl.innerHTML = '';
     
     if (this.items.length === 0) {
       cartItemsEl.innerHTML = '<p>Your cart is empty</p>';
+      document.getElementById('cart-total').textContent = '0.00';
+      document.getElementById('cart-count').textContent = '0';
+      document.getElementById('cart-badge').textContent = '0';
       return;
     }
     
+    // Calculate total and render items
+    let total = 0;
+    let itemCount = 0;
+    
     this.items.forEach(item => {
+      const itemTotal = item.price * item.quantity;
+      total += itemTotal;
+      itemCount += item.quantity;
+      
       const itemEl = document.createElement('div');
       itemEl.className = 'cart-item';
       itemEl.innerHTML = `
         <img src="${item.image}" alt="${item.name}">
         <div class="cart-item-info">
           <h4>${item.name}</h4>
-          <p>KSh ${item.price} x ${item.quantity}</p>
+          <p>KSh ${item.price.toFixed(2)} x ${item.quantity} = KSh ${itemTotal.toFixed(2)}</p>
         </div>
         <button class="cart-item-remove" data-id="${item.id}">&times;</button>
       `;
       cartItemsEl.appendChild(itemEl);
     });
     
-    document.getElementById('cart-total').textContent = this.total.toFixed(2);
+    // Update totals
+    document.getElementById('cart-total').textContent = total.toFixed(2);
+    document.getElementById('cart-count').textContent = itemCount;
+    document.getElementById('cart-badge').textContent = itemCount;
+    
+    this.saveToLocalStorage();
   },
   
-  updateCartCount: function() {
-    const count = this.items.reduce((sum, item) => sum + item.quantity, 0);
-    document.getElementById('cart-count').textContent = count;
-    document.getElementById('cart-badge').textContent = count;
+  showNotification: function(message) {
+    const notification = document.createElement('div');
+    notification.className = 'cart-notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.remove();
+    }, 2000);
   },
   
   saveToLocalStorage: function() {
@@ -1258,7 +1261,7 @@ const cart = {
   }
 };
 
-// Initialize cart
+// Initialize cart and event listeners
 document.addEventListener('DOMContentLoaded', function() {
   cart.loadFromLocalStorage();
   
@@ -1281,47 +1284,37 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Checkout button
   document.getElementById('checkout-btn').addEventListener('click', function() {
-    alert(`Proceeding to checkout. Total: KSh ${cart.total.toFixed(2)}`);
-    // In a real implementation, you would redirect to a checkout page
+    if (cart.items.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+    alert(`Proceeding to checkout. Total: KSh ${cart.items.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}`);
+  });
+  
+  // Single event delegation for all add-to-cart buttons
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('add-to-cart')) {
+      const product = e.target.closest('.product, .book');
+      const name = product.querySelector('h3').textContent;
+      const price = parseFloat(product.querySelector('.price').getAttribute('data-price'));
+      const image = product.querySelector('img')?.src || 'placeholder.jpg';
+      const id = name.toLowerCase().replace(/\s+/g, '-') + '-' + Math.random().toString(36).substr(2, 9);
+      
+      cart.addItem({
+        id: id,
+        name: name,
+        price: price,
+        image: image
+      });
+      
+      // Prevent default if it's a button
+      if (e.target.tagName === 'BUTTON') {
+        e.preventDefault();
+      }
+    }
   });
 });
-
-// Modify your existing addToCart function
-function addToCart(productName, productPrice, productImage, productId) {
-  cart.addItem({
-    id: productId || productName.toLowerCase().replace(/\s+/g, '-'),
-    name: productName,
-    price: parseFloat(productPrice),
-    image: productImage || 'placeholder.jpg'
-  });
-  
-  // Show cart sidebar when adding an item
-  document.getElementById('cart-sidebar').classList.add('open');
-  
-  // Optional: Show a quick confirmation
-  const notification = document.createElement('div');
-  notification.className = 'cart-notification';
-  notification.textContent = `${productName} added to cart!`;
-  document.body.appendChild(notification);
-  
-  setTimeout(() => {
-    notification.remove();
-  }, 2000);
-}
-
-// Update your product buttons to use the new addToCart function
-document.querySelectorAll('.product button, .book button').forEach(button => {
-  button.addEventListener('click', function() {
-    const product = this.closest('.product, .book');
-    const name = product.querySelector('h3').textContent;
-    const priceText = product.querySelector('p:last-of-type')?.textContent || '0';
-    const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
-    const image = product.querySelector('img')?.src || '';
     
-    addToCart(name, price, image);
-  });
-});
-
   </script>
 </body>
 </html>
