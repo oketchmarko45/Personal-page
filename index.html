@@ -1169,25 +1169,25 @@ function isFormFilled() {
 }
 
   // Improved Cart Functionality
-const cart = {
-  items: [],
+addItem: function(item) {
+  // Check if item already exists in cart
+  console.log('Adding item:', item); // Debugging line
+  const existingItem = this.items.find(i => i.id === item.id);
   
-  addItem: function(item) {
-    // Check if item already exists in cart
-    const existingItem = this.items.find(i => i.id === item.id);
-    
-    if (existingItem) {
-      existingItem.quantity += 1;
-    } else {
-      this.items.push({
-        ...item,
-        quantity: 1
-      });
-    }
-    
-    this.updateCart();
-    this.showNotification(`${item.name} added to cart`);
-  },
+  if (existingItem) {
+    existingItem.quantity += 1; // Increment quantity if item already exists
+  } else {
+    this.items.push({
+      ...item,
+      quantity: 1 // Initialize quantity to 1 for new items
+    });
+     console.log('New item added to cart:', item); // Debugging line
+  }
+  
+  this.updateCart(); // Update the cart UI
+  this.showNotification(`${item.name} added to cart`); // Show notification
+},
+
   
   removeItem: function(id) {
     this.items = this.items.filter(item => item.id !== id);
@@ -1294,6 +1294,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Single event delegation for all add-to-cart buttons
   document.addEventListener('click', function(e) {
     if (e.target.classList.contains('add-to-cart')) {
+       e.preventDefault(); // Prevent default action of the button
+      
       const product = e.target.closest('.product, .book');
       const name = product.querySelector('h3').textContent;
       const price = parseFloat(product.querySelector('.price').getAttribute('data-price'));
@@ -1306,6 +1308,8 @@ document.addEventListener('DOMContentLoaded', function() {
         price: price,
         image: image
       });
+    }
+  });
       
       // Prevent default if it's a button
       if (e.target.tagName === 'BUTTON') {
